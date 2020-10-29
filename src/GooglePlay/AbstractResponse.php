@@ -11,6 +11,7 @@ abstract class AbstractResponse
     const CONSUMPTION_STATE_CONSUMED = 1;
     const PURCHASE_STATE_PURCHASED = 0;
     const PURCHASE_STATE_CANCELED = 1;
+    const PURCHASE_STATE_DEFERRED = 1;
     const ACKNOWLEDGEMENT_STATE_YET_TO_BE = 0;
     const ACKNOWLEDGEMENT_STATE_DONE = 1;
 
