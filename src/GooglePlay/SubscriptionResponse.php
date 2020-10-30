@@ -1,8 +1,8 @@
 <?php
 
-use Carbon\Carbon;
-
 namespace ReceiptValidator\GooglePlay;
+
+use Carbon\Carbon;
 
 /**
  * Class SubscriptionResponse.
