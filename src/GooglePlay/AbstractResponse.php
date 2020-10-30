@@ -11,9 +11,11 @@ abstract class AbstractResponse
     const CONSUMPTION_STATE_CONSUMED = 1;
     const PURCHASE_STATE_PURCHASED = 0;
     const PURCHASE_STATE_CANCELED = 1;
-    const PURCHASE_STATE_DEFERRED = 2;
     const ACKNOWLEDGEMENT_STATE_YET_TO_BE = 0;
     const ACKNOWLEDGEMENT_STATE_DONE = 1;
+    const PAYMENT_STATE_PENDING = 0;
+    const PAYMENT_STATE_RECEIVED = 1;
+    const PAYMENT_STATE_DEFERRED = 2;
 
     /**
      * @var \Google_Service_AndroidPublisher_ProductPurchase|\Google_Service_AndroidPublisher_SubscriptionPurchase
