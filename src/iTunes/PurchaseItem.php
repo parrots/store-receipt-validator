@@ -86,6 +86,13 @@ class PurchaseItem implements ArrayAccess
     protected $is_in_intro_offer_period;
 
     /**
+     * For family shared IAPs this is true when the purchase was originated by someone else.
+     *
+     * @var bool
+     */
+    protected $granted_via_family_share;
+    
+    /**
      * When a subscriber redeems an offer, there is a promotional offer ID.
      *
      * @var string|null
@@ -129,6 +136,10 @@ class PurchaseItem implements ArrayAccess
             $this->quantity = (int) $this->raw_data['quantity'];
         }
 
+        if (array_key_exists('in_app_ownership_type', $this->raw_data)) {
+            $this->granted_via_family_share = $this->raw_data['in_app_ownership_type'] == 'FAMILY_SHARED';
+        }
+        
         if (array_key_exists('transaction_id', $this->raw_data)) {
             $this->transaction_id = $this->raw_data['transaction_id'];
         }
@@ -221,6 +232,14 @@ class PurchaseItem implements ArrayAccess
         return $this->is_in_intro_offer_period;
     }
 
+    /**
+     * @return bool|null
+     */
+    public function grantedViaFamilyShare(): ?bool
+    {
+        return $this->granted_via_family_share;
+    }
+    
     /**
      * @return string|null
      */
