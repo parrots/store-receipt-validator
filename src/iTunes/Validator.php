@@ -3,6 +3,8 @@
 namespace ReceiptValidator\iTunes;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Exception\GuzzleException;
+use InvalidArgumentException;
 use ReceiptValidator\RunTimeException;
 
 class Validator
@@ -59,15 +61,11 @@ class Validator
      *
      * @param string $endpoint
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct(string $endpoint = self::ENDPOINT_PRODUCTION)
     {
-        if ($endpoint !== self::ENDPOINT_PRODUCTION && $endpoint !== self::ENDPOINT_SANDBOX) {
-            throw new \InvalidArgumentException("Invalid endpoint '{$endpoint}'");
-        }
-
-        $this->endpoint = $endpoint;
+        $this->setEndpoint($endpoint);
     }
 
     /**
@@ -129,14 +127,17 @@ class Validator
     }
 
     /**
-     * set endpoint.
-     *
      * @param string $endpoint
+     *
+     * @throws InvalidArgumentException
      *
      * @return $this
      */
     public function setEndpoint(string $endpoint): self
     {
+        if ($endpoint !== self::ENDPOINT_PRODUCTION && $endpoint !== self::ENDPOINT_SANDBOX) {
+            throw new InvalidArgumentException("Invalid endpoint '{$endpoint}'");
+        }
         $this->endpoint = $endpoint;
 
         return $this;
@@ -240,7 +241,7 @@ class Validator
      * @param null|string $shared_secret
      *
      * @throws RunTimeException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      *
      * @return ResponseInterface
      */
@@ -263,7 +264,7 @@ class Validator
      * @param HttpClient $client
      *
      * @throws RunTimeException
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      *
      * @return ProductionResponse|SandboxResponse
      */
